@@ -1,0 +1,89 @@
+{% extends 'pub_base.html' %}
+{% load static %}
+
+
+{% block cart_active %}active{% endblock cart_active %}
+
+{% block main_content %}
+<div class="container">
+ {% include 'utils/msg.html' %} 
+</div>
+<div class="container mt-3 mb-5">
+  <div class="row align-items-center mb-2 justify-content-between">
+    <div class="col-12 col-md-4">
+      <h3 class="h5 text-center text-lg-left mb-3 mb-lg-0">Welcome, {{user}}!</h3>
+    </div>
+
+    <div class="col-12 col-md-5 d-flex justify-content-around">
+      <div class=" pe-2">
+        <h6 class="m-0">{{user_cart.count}} <span>menu in your cart</span></h6>
+        <small>{{user_cart_items.qty}} items in total</small>
+      </div>
+
+      <div class="col-auto  pe-0">
+        <h6 class="m-0">Amount in total</h6>
+        <small style="text-decoration:line-through;">GHC{{user_cart_items.amount}}</small>
+        <small class="ps-2">GHC{{user_cart_items.amount_to_pay}}</small>
+      </div>
+    </div>
+    
+    <div class="mb-2">
+      <a href="{% url 'new_order' %}" class="btn btn-outline-warning" style="max-width: 20em;">PROCEED TO ORDER</a>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <!-- CARD -->
+    {% for cart in user_cart %}
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 p-2" style="max-width: 28em;">
+      <div class="card rounded p-0 bg-light text-">
+        <div class="row g-0">
+          <div class="col-3 mt-md-1">
+            <img src="{{cart.menu.img.url}}" class="img-fluid rounded-start img-thumbnail m-2 h-px-50 w-px-50"
+              alt="...">
+          </div>
+
+          <div class="col-7">
+            <h6 class="pt-3 mb-md-0">{{cart.menu.name}}</h6>
+            <div class="d-flex">
+              <small style="text-decoration:line-through;">GHC{{cart.price}}</small>
+              <small class="ps-3">GHC{{cart.get_amount_to_pay}}</small>
+            </div>
+          </div>
+        </div>
+
+        <small class="p-2">{{cart.menu.detail}}</small>
+
+        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+          <form action="." method="post">
+            {% csrf_token %}
+            <button name="delete" value="{{cart.pk}}" class="btn btn-outline-warning p-1">Remove</button>            
+          </form>
+
+          <form action="." method="POST">
+            {% csrf_token %}
+            <div class="d-flex align-items-center">
+              <input name="cart" value="{{cart.pk}}" class="d-none">
+              <button class="btn btn-outline-warning pt-0 pb-0" style="font-size: 1.5em; font-weight:550;" name="plus_minus" value="-1">-</button>
+
+              <input type="text" name="qty" id="cart_qty" style="width: 20px;text-align: center; background: transparent; border:none; outline: none; margin:2px;" class="" value="{{cart.qty}}">
+
+              <button class="btn btn-outline-warning pt-0 pb-0" style="font-size: 1.5em;" name="plus_minus" value="1">+</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+
+  <div class="text-center m-3">
+      <a href="{% url 'new_order' %}" class="btn btn-outline-warning" style="max-width: 20em;">ORDER NOW</a>
+    </div>
+</div>
+
+{% endblock main_content %}
+     

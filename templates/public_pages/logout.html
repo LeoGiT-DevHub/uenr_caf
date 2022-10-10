@@ -1,0 +1,12 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block main_content %}    
+
+<form action="." method="post">
+  {% csrf_token %}
+  <p>Are you sure you want to Log Out ? "{{object}}"?</p>
+  <input type="submit" value="Confirm">
+</form>
+
+{% endblock main_content %}

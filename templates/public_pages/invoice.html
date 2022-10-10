@@ -1,0 +1,118 @@
+{% extends 'pub_base.html' %}
+{% load static %}
+{% load humanize %}
+{% load paystack %}
+
+{% block home_active %} active {% endblock home_active %}
+
+{% block hero_area %} hero_area h-50 {% endblock hero_area %}
+
+
+{% block main_content %}
+<div class="container w-75-lg">
+  <div class="row align-items-center mb-4">
+    <div class="col">
+      <h2 class="h5 page-title"><small class="text-muted text-uppercase">Invoice</small><br />#{{order.invoice}}</h2>
+    </div>
+    <div class="col-auto d-flex">
+      <button type="button" onclick="printTicket('print_here')" class="btn btn-secondary mr-2">Print</button>
+      
+      {% paystack_button amount=order.amount_to_paid currency='GHS' ref=order.invoice email="j@example.com" button_class="btn btn-primary" redirect_url="localhost:8000/home/" %}
+    </div>
+  </div>
+
+  <div class="card shadow" id="print_here">
+    <div class="card-body p-5">
+      <div class="row mb-5">
+        <div class="col-12 text-center mb-4">
+          <img src="../../static/assets/images/UENR-Logo-272x300.jpg" class="navbar-brand-img brand-sm mx-auto mb-4" alt="...">
+          <h2 class="mb-0 text-uppercase">Invoice</h2>
+        </div>
+
+        <div class="col-md-6">
+          <p class="small text-muted text-uppercase mb-2">Invoice from</p>
+          <p class="mb-4">
+            <strong>UENR CAFETARIA </strong><br />CAFETARIA Management <br /> 9022 Suspendisse Rd.<br /> High Wycombe<br /> (024) 130-1463<br />
+          </p>
+          <p>
+            <span class="small text-muted text-uppercase">Invoice #</span><br />
+            <strong>{{order.invoice}}</strong>
+          </p>
+        </div>
+
+        <div class="col-md-6 text-right">
+          <p class="small text-muted text-uppercase mb-2">Invoice to</p>
+          <p class="mb-4">
+            <strong>Walter Sawyer</strong><br /> {{order.delivery_address}}<br /> {{order.customer_name}}<br /> {{order.customer_contact}}<br />
+          </p>
+          <p>
+            <small class="small text-muted text-uppercase">Due date</small><br />
+            <strong>{{order.due_date|date}}</strong>
+          </p>
+        </div>
+      </div> <!-- /.row -->
+
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">Cart</th>
+            <th scope="col">Menu</th>
+            <th scope="col" class="text-right">Price</th>
+            <th scope="col" class="text-right">QTY</th>
+            <th scope="col" class="text-right">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cart in order.cart.all %}
+          <tr>
+            <th scope="row">{{cart.pk}}</th>
+            <td>{{cart.menu}}</td>
+            <td class="text-right">{{cart.price}}</td>
+            <td class="text-right">{{cart.qty}}</td>
+            <td class="text-right">{{cart.get_price}}</td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+      <div class="row mt-5">
+        <div class="col-2 text-center">
+          <img src="./assets/images/qrcode.svg" class="navbar-brand-img brand-sm mx-auto my-4" alt="...">
+        </div>
+        <div class="col-md-5">
+          <p class="text-muted small">
+            <strong>Sales Person :</strong> {{order.processed_by}}</p>
+        </div>
+        <div class="col-md-5">
+          <div class="text-right mr-2">
+            <p class="mb-2 h6">
+              <span class="text-muted">Subtotal : </span>
+              <strong>GHC{{order.price}}</strong>
+            </p>
+            <p class="mb-2 h6">
+              <span class="text-muted">DISC : </span>
+              <strong>GHC{{order.discount}}</strong>
+            </p>
+            <p class="mb-2 h6">
+              <span class="text-muted">Total : </span>
+              <span>GHC{{order.amount_to_paid}}</span>
+            </p>
+          </div>
+        </div>
+      </div> <!-- /.row -->
+    </div> <!-- /.card-body -->
+  </div>
+</div>
+
+<script type="text/javascript">
+  function printTicket(print_here){
+    var content = document.getElementById("print_here").innerHTML;
+    w = window.open();
+    w.document.write(content);
+    w.print();
+    w.close();
+  }
+</script>
+
+
+{% endblock main_content %}

@@ -1,0 +1,98 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block main_content %}         
+  
+  <div class="row align-items-center mb-2">
+    <div class="col">
+      <h2 class="h5 page-title">Welcome, {{user.get_short_name}}!</h2>
+    </div>
+
+    <div class="col-auto">
+      <form class="form-inline">
+        <div class="form-group">
+          <a href="." class="btn btn-sm"><span class="fe fe-refresh-ccw fe-16 text-muted"></span></a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DATA TABLES -->
+  <h2 class="mb-2 page-title text-center">Menu table</h2>
+  <div class="row my-4">
+    <!-- Small table -->
+    <div class="col-md-12">
+      <div class="card shadow">
+        <div class="card-body">
+          <!-- table -->
+          <table class="table datatables" id="dataTable-1">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date Added</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Discount (%)</th>
+                <th>Sales Price</th>
+                <th>Sold (QTY)</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for menu in all_menu %}
+              <tr>
+                <td>#</td>
+                <td>{{menu.date|date}}</td>
+                <td>{{menu.name}}</td>
+                <td>{{menu.category}}</td>
+                <td>{{menu.price}}</td>
+                <td>{{menu.discount}}</td>
+                <td>{{menu.get_amount_to_pay|floatformat:2}}</td>
+                <td>{{menu.get_sold_count}}</td>
+                <td><button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="text-muted">More</span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{% url 'update_menu' menu.pk %}">Edit</a>
+                    <a class="dropdown-item" href="{{menu.get_absolute_url}}">Details</a>
+                    <a class="dropdown-item" href="{% url 'delete_menu' menu.pk %}">Delete</a>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!-- simple table -->
+  </div> 
+  <!-- end section -->
+
+{% endblock main_content %}
+  
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag()
+    {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-56159088-1');
+  </script>
+
+  <!-- DATA TABLES -->
+  <script src="js/jquery.dataTables.min.js"></script>
+  <script src="js/dataTables.bootstrap4.min.js"></script>
+  <script>
+    $('#dataTable-1').DataTable(
+      {
+        autoWidth: true,
+        "lengthMenu": [
+          [16, 32, 64, -1],
+          [16, 32, 64, "All"]
+        ]
+      });
+  </script>

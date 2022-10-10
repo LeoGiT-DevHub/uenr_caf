@@ -1,0 +1,57 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block main_content %}     
+<div class="container">
+  {% include 'utils/msg.html' %}   
+  
+  <form method="POST" enctype="multipart/form-data" class="m-md-3">
+    {% csrf_token %}
+    <h3 class="m-3 text-center">Add New Menu</h3><hr>
+
+    <p class="mb-2">Menu Image</p>
+    <div>{{form.img}}</div>
+    <div class="row">
+      <div class="col-12 col-md-6 p-3">
+        <span>{{form.name.label_tag}}</span>
+        <div>{{form.name}}</div>
+      </div>
+      
+      <div class="col-12 col-md-6 p-3">
+        <span>{{form.category.label_tag}}</span>
+        <div>{{form.category}}</div>
+      </div>
+    </div>
+
+    <span>{{form.detail.label_tag}}</span>
+    <div>{{form.detail}}</div>
+
+    <div class="row">
+      <div class="col-12 col-md-4 p-3">
+        <span>{{form.price.label_tag}}</span>
+        <div>{{form.price}}</div>
+      </div>
+      
+      <div class="col-12 col-md-4 p-3">
+        <span>{{form.discount.label_tag}}</span>
+        <div>{{form.discount}}</div>
+      </div>
+      
+      <div class="col-12 col-md-4 p-3">
+        <span>{{form.qty.label_tag}}</span>
+        <div>{{form.qty}}</div>
+      </div>
+    </div>
+    
+    <div class="col-12 pt-5 text-center">
+      {% if object %}
+      <input type="submit" value="Update" class="btn btn-warning text-white pr-5 pl-5">
+      {% else %}
+      <input type="submit" value="Create" class="btn btn-warning text-white pr-5 pl-5">
+      {% endif %}
+    </div>
+  </form>
+</div>
+ 
+
+{% endblock main_content %}

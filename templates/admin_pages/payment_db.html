@@ -1,0 +1,101 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block main_content %}           
+
+  <div class="row align-items-center mb-2">
+    <div class="col">
+      <h2 class="h5 page-title">Welcome, {{user.get_short_name}}!</h2>
+    </div>
+
+    <div class="col-auto">
+      <form class="form-inline">
+        <div class="form-group">
+          <button type="button" class="btn btn-sm"><span class="fe fe-refresh-ccw fe-16 text-muted"></span></button>
+          <button type="button" class="btn btn-sm mr-2"><span class="fe fe-filter fe-16 text-muted"></span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- DATA TABLES -->
+  <h2 class="mb-2 page-title text-center">Order Payment Database</h2>
+
+  <div class="row my-4">
+    <!-- Small table -->
+    <div class="col-md-12">
+      <div class="card shadow">
+        <div class="card-body">
+          <!-- table -->
+          <table class="table datatables" id="dataTable-1">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>reference</th>
+                <th>Paid For</th>
+                <th>Amount</th>
+                <th>Paid With</th>
+                <th>Paid To</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for payment in payments %}
+              <tr>
+                <td>#</td>
+                <td>{{payment.date|date}}</td>
+                <td>{{payment.ref}}</td>
+                <td>{{payment.paid_for}}</td>
+                <td>{{payment.amount}}</td>
+                <td>{{payment.get_paid_with_display}}</td>
+                <td>{{payment.through.get_short_name}}</td>
+                <td>{{path.get_status}}</td>
+                <td><button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="text-muted">more</span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{% url 'admin:finance_orderpayment_change' payment.pk %}">Edit</a>
+                    <a class="dropdown-item" href="{{payment.get_absolute_url}}">Details</a>
+                    <a class="dropdown-item" href="{% url 'admin:finance_orderpayment_delete' payment.pk %}">Delete</a>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!-- simple table -->
+  </div> 
+  <!-- end section -->
+
+{% endblock main_content %}
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag()
+    {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-56159088-1');
+  </script>
+
+  <!-- DATA TABLES -->
+  <script src="js/jquery.dataTables.min.js"></script>
+  <script src="js/dataTables.bootstrap4.min.js"></script>
+  <script>
+    $('#dataTable-1').DataTable(
+      {
+        autoWidth: true,
+        "lengthMenu": [
+          [16, 32, 64, -1],
+          [16, 32, 64, "All"]
+        ]
+      });
+  </script>

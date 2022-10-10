@@ -1,0 +1,137 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block main_content %}           
+
+  <div class="row align-items-center mb-2">
+    <div class="col">
+      <h2 class="h5 page-title">Welcome!</h2>
+    </div>
+
+    <div class="col-auto">
+      <form class="form-inline">
+        <div class="form-group">
+          <button type="button" class="btn btn-sm"><span class="fe fe-refresh-ccw fe-16 text-muted"></span></button>
+          <button type="button" class="btn btn-sm mr-2"><span class="fe fe-filter fe-16 text-muted"></span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- DATA TABLES -->
+  <h2 class="mb-2 page-title">Data table</h2>
+  <p class="card-text">DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, built upon
+    the foundations of progressive enhancement, that adds all of these advanced features to any HTML table. </p>
+  <div class="row my-4">
+    <!-- Small table -->
+    <div class="col-md-12">
+      <div class="card shadow">
+        <div class="card-body">
+          <!-- table -->
+          <table class="table datatables" id="dataTable-1">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Invoice</th>
+                <th>Customer Name</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jun 8, 2019</td>
+                <td>INV-1446-9234</td>
+                <td>Asset Management</td>
+                <td>55.50</td>
+                <td>2.00</td>
+                <td>52.50</td>
+                <td>Served</td>
+                <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="text-muted sr-only">Action</span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Edit</a>
+                    <a class="dropdown-item" href="#">Remove</a>
+                    <a class="dropdown-item" href="#">Assign</a>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Jun 8, 2019</td>
+                <td>INV-1446-9234</td>
+                <td>Asset Management</td>
+                <td>55.50</td>
+                <td>2.00</td>
+                <td>52.50</td>
+                <td>Served</td>
+                <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="text-muted sr-only">Action</span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Edit</a>
+                    <a class="dropdown-item" href="#">Remove</a>
+                    <a class="dropdown-item" href="#">Assign</a>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Jun 8, 2019</td>
+                <td>INV-1446-9234</td>
+                <td>Asset Management</td>
+                <td>55.50</td>
+                <td>2.00</td>
+                <td>52.50</td>
+                <td>Served</td>
+                <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="text-muted sr-only">Action</span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Edit</a>
+                    <a class="dropdown-item" href="#">Remove</a>
+                    <a class="dropdown-item" href="#">Assign</a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!-- simple table -->
+  </div> 
+  <!-- end section -->
+  
+{% endblock main_content %}
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag()
+    {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-56159088-1');
+  </script>
+
+  <!-- DATA TABLES -->
+  <script src="js/jquery.dataTables.min.js"></script>
+  <script src="js/dataTables.bootstrap4.min.js"></script>
+  <script>
+    $('#dataTable-1').DataTable(
+      {
+        autoWidth: true,
+        "lengthMenu": [
+          [16, 32, 64, -1],
+          [16, 32, 64, "All"]
+        ]
+      });
+  </script>

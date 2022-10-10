@@ -1,0 +1,50 @@
+{% extends 'pub_base.html' %}
+{% load static %}
+
+{% block main_content %} 
+
+<div class="container mt-3 mb-5">
+  <div class="row align-items-center mb-4">
+    <div class="col">
+      <h3 class="h5">Welcome, {{user}}!</h3>
+    </div>
+    <small class="col-auto m-0 pb-1">{{user_orders.count}}<span> Orders</span></small>
+    <small class="col-auto pb-2">{{unserved_orders.count}} pending</small>
+  </div>
+
+  <table class="table table-striped d-table">
+    <thead>
+      <tr>
+        <td>Date</td>
+        <td>Invoice</td>
+        <td>Price (GHC)</td>
+        <td>Status</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in user_orders %}
+      <tr>
+        <td>{{order.date|date}}</td>
+        <td>{{order.invoice}}</td>
+        <td>{{order.price}}</td>
+        <td>{{order.served}}</td>
+        <td class="pl-1"><a href="" class="btn p-2">More</a></td>
+      </tr>
+      {% endfor %}
+
+      {% for order in unserved_orders %}
+      <tr>
+        <td>{{order.date|date}}</td>
+        <td>{{order.invoice}}</td>
+        <td>{{order.price}}</td>
+        <td>{{order.served}}</td>
+        <td class="pl-1"><a href="" class="btn p-2">More</a></td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+
+{% endblock main_content %}

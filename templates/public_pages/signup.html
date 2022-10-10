@@ -1,0 +1,109 @@
+{% extends 'pub_base.html' %}
+{% load static %}
+
+{% block hero_area %}{% endblock hero_area %}
+{% block hero_img %}{% endblock hero_img %}
+
+{% block slider_area %}{% endblock slider_area %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row py-5 align-items-center">
+        <!-- Side Display -->
+        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+            <img src="{% static 'assets/images/UENR-Logo-272x300.jpg' %}" alt="" class="img-fluid mb-2 d-none d-md-block m-auto rounded img-thumbnail">
+            <h1 class="text-center">UENR CAFETERIA</h1>
+            <p class="font-italic text-muted mb-0 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente omnis excepturi
+            </p>
+        </div>
+
+        <!-- Registeration Form -->
+        <div class="col-md-7 col-lg-6 ml-auto">
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <h1 class="m-auto pb-4">Registration Form</h1>
+                        <!-- Email Address -->
+                        <div class="input-group col-lg-12 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                    <i class="fa fa-envelope text-muted"></i>
+                                </span>
+                            </div>
+                            {{form.email}}
+                        </div>
+
+                        <!-- First Name -->
+                        <div class="input-group col-lg-6 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                    <i class="fa fa-user text-muted"></i>
+                                </span>
+                            </div>
+                            {{form.first_name}}
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="input-group col-lg-6 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                    <i class="fa fa-user text-muted"></i>
+                                </span>
+                            </div>
+                            {{form.other_name}}
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="input-group col-lg-12 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                    <i class="fa fa-phone-square text-muted"></i>
+                                </span>
+                            </div>
+                            {{form.contact}}
+                        </div>
+
+                        <!-- Password -->
+                        <div class="input-group col-lg-6 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                    <i class="fa fa-lock text-muted"></i>
+                                </span>
+                            </div>
+                            {{form.password1}}
+                        </div>
+
+                        <!-- Password Confirmation -->
+                        {{form.error}}
+                        <div class="input-group col-lg-6 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                    <i class="fa fa-lock text-muted"></i>
+                                </span>
+                            </div>
+                            {{form.password2}}
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group col-lg-12 mx-auto mb-0">
+                            <input type="Submit" value="Create your account" class="btn btn-warning btn-block py-2 font-weight-bold">
+                        </div>
+
+                    <!-- Divider Text -->
+                    <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                        <div class="border-bottom w-100 ml-5"></div>
+                        <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+                        <div class="border-bottom w-100 mr-5"></div>
+                    </div>
+
+                    <!-- Already Registered -->
+                    <div class="text-center w-100">
+                        <p class="text-muted font-weight-bold">Already Registered? <a href="{% url 'login' %}" class="text-warning ml-2">Login</a></p>
+                    </div>
+                </div>
+            </form> 
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

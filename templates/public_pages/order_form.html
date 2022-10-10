@@ -1,0 +1,90 @@
+{% extends 'pub_base.html' %}
+{% load static %}
+
+
+
+{% block main_content %}
+<div class="container mt-3 mb-5">
+
+  <div class="row align-items-center mb-4">
+    <div class="col">
+      <h3 class="h5">Welcome, {{user}}!</h3>
+    </div>
+    <small class="col-auto m-0 pb-1">{{user_cart_items.qty}} <span>items to orders</span></small>
+    <small class="col-auto pb-2">Amounting to GHC{{user_cart_items.amount_to_pay}}</small>
+    <small class="col-auto pb-2">Discount earned: GHC{{user_cart_items.discount|floatformat:2}}</small>
+  </div>
+
+  <div class="row mb-4 justify-content-center"> 
+  {% for cart in user_cart %}
+    <div class="col-1" style="max-width: 8em;">
+      <div class="card rounded p-2 bg-light text-center">
+        <h6 class="">{{cart.menu.name}}</h6>
+        <small class="">GHC{{cart.menu.price}}</small>
+        <small class="pt-1">Qty: {{cart.qty}}</small>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+  <form method="POST" class="row">
+    {% csrf_token %}
+    
+    <div class="col-6 col-lg-4 p-2">
+    {{form.customer_name}}
+    </div>
+
+    <div class="col-6 col-lg-4 p-2">
+    {{form.customer_contact}}
+    </div>
+
+    <div class="col-12 col-lg-4 p-2">
+    {{form.customer_email}}
+    </div>
+
+    <div class="col-12 d-flex justify-content-around p-3" onchange="Delivery()">
+      <div id="pick_up_container">
+        <input type="radio" name="delivery" id="pick_up" checked>
+        <label for="pick_up">Pick Up</label>
+      </div>
+      <div id="delivery_container">
+        <input type="radio" name="delivery" id="delivery">
+        <label for="delivery">Request Delivery</label>
+      </div>
+      <script>
+        function Delivery(){
+          if (document.getElementById('delivery').checked){
+            document.getElementById('delivery_info').classList.remove('d-none');
+          }else{
+            document.getElementById('delivery_info').classList.add('d-none')
+          }
+        }
+      </script>
+    </div>
+
+    <div id="delivery_info" class="w-100 d-none">
+    <div class="col-12 p-2">
+    {{form.delivery_address}}
+    </div>
+
+    <div class="col-12 p-2">
+    {{form.address_description}}
+    </div>      
+    </div>
+
+    <div class="col-12 col-lg-4 p-2">
+    {{form.payment_method}}
+    </div>
+
+    <div class="col-6 col-lg-4 p-2 pb-5 d-flex">
+      <label for="order_due_date">Due date and time</label>
+    {{form.due_date}}
+    </div>
+
+    <div class="col-6 col-lg-4 p-2 m-auto text-right pr-5 pb-5">
+    {{form.served}}
+      <label for="order_served" class="form-check-label">Order served ?</label>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-warning m-auto pr-5 pl-5 text-white">
+  </form>
+</div>
+{% endblock main_content %}

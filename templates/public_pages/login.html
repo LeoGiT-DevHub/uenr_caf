@@ -1,0 +1,74 @@
+{% extends 'pub_base.html' %}
+{% load static %}
+
+{% block hero_area %}{% endblock hero_area %}
+{% block hero_img %}{% endblock hero_img %}
+
+{% block slider_area %}{% endblock slider_area %}
+
+{% block main_content %}
+<div class="container mt-5">
+    <div class="row py-5 align-items-center">
+        <!-- For Demo Purpose -->
+        <div class="col-md-5 pr-lg-5 mb-4 mb-md-0">
+            <img src="{% static 'assets/images/UENR-Logo-272x300.jpg' %}" alt="" class="img-fluid mb-2 d-none d-md-block m-auto rounded img-thumbnail">
+            <h1 class="text-center">UENR CAFETERIA</h1>
+            <p class="font-italic text-muted mb-0 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente omnis excepturi
+            </p>
+        </div>
+
+        <!-- Login Form -->
+        <div class="col-md-7 col-lg-6 ml-auto">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <h1 class="text-center pb-4">Login</h1>
+                    <!-- Email Address -->
+                    <div class="input-group col-lg-12 mb-4">
+                        {% if form.email.errors %}
+                        {{form.email.errors}}
+                        {% endif %}
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                <i class="fa fa-envelope text-muted"></i>
+                            </span>
+                        </div>
+                        {{form.email}}
+                    </div>
+
+                    <!-- Password Confirmation -->
+                    <div class="input-group col-lg-12 mb-4">
+                        {% if form.password.errors %}
+                        {{form.password.errors}}
+                        {% endif %}
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-3 border-md border-right-0">
+                                <i class="fa fa-lock text-muted"></i>
+                            </span>
+                        </div>
+                        {{form.password}}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group col-lg-12 mx-auto mb-0">
+                        <input type="Submit" value="Login" class="btn btn-warning btn-block py-2 font-weight-bold">
+                    </div>
+
+                    <!-- Divider Text -->
+                    <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                        <div class="border-bottom w-100 ml-5"></div>
+                        <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+                        <div class="border-bottom w-100 mr-5"></div>
+                    </div>
+
+                    <!-- Already Registered -->
+                    <div class="text-center w-100">
+                        <p class="text-muted font-weight-bold">Don't have an account? <a href="{% url 'signup' %}" class="text-warning ml-2">Sign up</a></p>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

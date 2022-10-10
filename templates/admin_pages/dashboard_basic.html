@@ -1,0 +1,214 @@
+{% extends 'admin_base.html' %}
+
+{% block main_content %}
+    <div class="row align-items-center">
+      <div class="col">
+        <h2 class="h5 page-title">Welcome, {{user.get_short_name}}!</h2>
+      </div>
+    
+      <div class="col-auto">
+        <form class="form-inline">
+          <div class="form-group">
+            <a href="" class="btn btn-sm"><span class="fe fe-refresh-ccw fe-16 text-muted"></span></a>
+            <button type="button" class="btn btn-sm mr-2" data-toggle="modal" data-target=".modal-slide"><span class="fe fe-filter fe-16 text-muted"></span></button>
+            
+            <div class="modal fade modal-slide" tabindex="-1" role="dialog" aria-labelledby="filterModal" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="filterModal">Filters</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <i class="fe fe-x fe-12"></i>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h5>Filter By Period</h5>
+                    <select name="filter_period" id="filterPeriod" class="form-control w-100">
+                      <option value="today" selected>Today</option>
+                      <option value="week">This Week</option>
+                      <option value="month">This Month</option>
+                      <option value="year">This Year</option>
+                      <option value="all">All Orders</option>
+                    </select>
+                  </div>
+                  <div class="modal-footer">
+                    <form action="." method="get">
+                      <button type="submit" class="btn mb-2 btn-primary btn-block">Apply</button>
+                      <button type="reset" class="btn mb-2 btn-secondary btn-block">Reset</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row pt-3">
+      <div class="col-md-6">
+        <div class="card shadow mb-4">
+          <div class="card-header bg-white">
+            <strong>Orders</strong>
+          </div>
+          <div class="card-body px-4">
+            <div class="row">
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Total</p>
+                <span class="h5"><small>GHC</small>{{orders.amount}}</span><br />
+                <span class="small text-muted">{{orders.count}} request</span>
+              </div>
+
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Served</p>
+                <span class="h5"><small>GHC</small>{{served_orders.amount}}</span><br />
+                <span class="small text-muted">{{served_orders.count}} request</span>
+              </div>
+              
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Pending</p>
+                <span class="h5"><small>GHC</small>{{pending_orders.amount}}</span><br />
+                <span class="small text-muted">{{pending_orders.count}} request</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow mb-4">
+          <div class="card-header bg-white">
+            <strong>Payments</strong>
+          </div>
+          <div class="card-body px-4">
+            <div class="row">
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Total</p>
+                <span class="h5"><small>GHC</small>{{payment.amount}}</span><br />
+                <span class="small text-muted">{{payment.count}} request</span>
+              </div>
+
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Cash</p>
+                <span class="h5"><small>GHC</small>{{cash_payment.amount}}</span><br />
+                <span class="small text-muted">{{cash_payment.count}} request</span>
+              </div>
+
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">E-Cash</p>
+                <span class="h5"><small>GHC</small>{{e_payment.amount}}</span><br />
+                <span class="small text-muted">{{e_payment.count}} request</span>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow mb-4">
+          <div class="card-header bg-white">
+            <strong>Revenue</strong>
+          </div>
+          <div class="card-body px-4">
+            <div class="row">
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Sales</p>
+                <span class="h5"><small>GHC</small>{{revenue.amount}}</span><br />
+                <span class="small text-muted">{{revenue.count}} request</span>
+              </div>
+
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Management</p>
+                <span class="h5">GHC530.00</span><br />
+                <span class="small text-muted">22 request</span>
+              </div>
+
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Others</p>
+                <span class="h5">GHC530.00</span><br />
+                <span class="small text-muted">22 request</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow mb-4">
+          <div class="card-header bg-white">
+            <strong>Expense</strong>
+          </div>
+          <div class="card-body px-4">
+            <div class="row">
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Sales</p>
+                <span class="h5">GHC530.00</span><br />
+                <span class="small text-muted">22 request</span>
+              </div>
+
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Donations</p>
+                <span class="h5">GHC530.00</span><br />
+                <span class="small text-muted">22 request</span>
+              </div>
+
+              <div class="col-4 text-center mb-3">
+                <p class="mb-1 small text-muted">Others</p>
+                <span class="h5">GHC530.00</span><br />
+                <span class="small text-muted">22 request</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="food_section col-md-12">
+        <div class="card shadow mb-4">
+          <div class="row card-header m-0 pl-2 bg-white">
+            <strong class="col pt-1" style="min-width: 6em;">Menu</strong>
+            <ul class="col-auto filters_menu m-0 pr-3">
+              <li class="active" data-filter="*">All</li>
+              {% for cat in menu_cat %}
+              <li data-filter=".{{cat}}">{{cat.name}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="card-body px-4">
+            <div class="row grid border-bottom">
+              {% for menu in all_menu %}
+              <div class="col-2 text-center mb-5 all {{menu.category}}">
+                <p class="mb-1 small text-muted">{{menu.name}}</p>
+                <span class="h5"><small>GHC</small>{{menu.get_today_sales.amount}}</span><br />
+                <span class="small text-muted">{{menu.get_today_sales.qty}} sold</span>
+              </div>
+              {% endfor %}
+            </div>
+
+            <table class="table table-striped table-borderless mt-3 mb-1 mx-n1 table-sm">
+              <thead class="">
+                <tr>
+                  <th class="w-50">Menu</th>
+                  <th class="text-right">This Week</th>
+                  <th class="text-right">This Month</th>
+                  <th class="text-right">This Year</th>
+                  <th class="text-right">Total</th>
+                </tr>
+              </thead>
+              <tbody class="">
+                {% for menu in all_menu %}
+                <tr class="col all {{menu.category}}">
+                  <td>{{menu.name}}</td>
+                  <td class="text-right">{{menu.get_this_week_sales.amount}} (Qty: {{menu.get_this_week_sales.qty}})</td>
+                  <td class="text-right">{{menu.get_this_month_sales.amount}} (Qty: {{menu.get_this_month_sales.qty}})</td>
+                  <td class="text-right">{{menu.get_this_year_sales.amount}} (Qty: {{menu.get_this_year_sales.qty}})</td>
+                  <td class="text-right">{{menu.get_total_sales.amount}} (Qty: {{menu.get_total_sales.qty}})</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div> <!-- .card-body -->
+        </div> <!-- .card -->
+      </div>                
+    </div>
+{% endblock main_content %}
