@@ -29,7 +29,6 @@
   <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
 </head>
 <body>
-    
   <div class="{% block hero_area %}{% endblock hero_area %}">
     {% block hero_img %}
 
@@ -57,14 +56,17 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+
             <li class="nav-item mb-2 mb-lg-0 {% block menu_active %}{% endblock menu_active %}">
               <i class="nav-icon fa fa-list d-lg-none text-white"></i>
               <a class="nav-link" href="{% url 'menu' %}">Menu</a>
             </li>
+
             <li class="nav-item mb-2 mb-lg-0 {% block service_active %}{% endblock service_active %}">
               <i class="nav-icon fa fa-address-book d-lg-none text-white"></i>
               <a class="nav-link" href="{% url 'home' %}#our_service">Our Service</a>
             </li>
+            
             <li class="nav-item mb-2 mb-lg-0">
               <i class="nav-icon fa-solid fa-utensils d-lg-none text-white"></i>
               <a class="nav-link" href="">Book Table</a>
@@ -87,7 +89,7 @@
         <div class="user_option d-none d-lg-flex">
           {% if user.is_authenticated %}
           <a class="cart_link pt-1" href="{% url 'user_cart' %}">
-            <span class="text-warning position-absolute fw-bold" style="top: 6px; font-size: 10px;">{{user.user_cart.count}}</span>
+            <span class="text-warning position-absolute fw-bold" style="top: 6px; font-size: 10px;">{{user.get_user_cart_pending.count}}</span>
             <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
               <g>
                   <g>
@@ -185,11 +187,11 @@
               </a>
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>Call +233 24 130 1463</span>
+                <span>Call +233 24 619 9627</span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>uenr.cafeteria@gmail.com</span>
+                <span>uenr.cafeteria@uenr.edu.gh</span>
               </a>
             </div>
           </div>
@@ -198,8 +200,8 @@
         <div class="col-md-4 footer-col">
           <div class="footer_detail">
             <a href="" class="footer-logo text-warning nav-link" style="font-size: 1.8em;">UENR CAFETERIA</a>
-            <p>Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with</p>
-            <div class="footer_social">
+            <p>We provide good services for our customers.</p>
+            {% comment %} <div class="footer_social">
               <a href="">
                   <i class="fa fa-brands fa-facebook" aria-hidden="true"></i>
               </a>
@@ -215,14 +217,14 @@
               <a href="">
                   <i class="fa fa-brands fa-pinterest" aria-hidden="true"></i>
               </a>
-            </div>
+            </div> {% endcomment %}
           </div>
         </div>
 
         <div class="col-md-4 footer-col">
           <h4 class="text-warning">Opening Hours</h4>
           <p>Monday  -  Friday</p>
-          <p>08.00 Am  -  05.30 Pm</p>
+          <p>08.00 Am  -  05.00 Pm</p>
         </div>
       </div>
 

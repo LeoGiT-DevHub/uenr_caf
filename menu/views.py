@@ -144,6 +144,7 @@ class MenuDetailView(SuccessMessageMixin, generic.DetailView):
 class UpdateMenuView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.UpdateView):
   template_name = 'menu_form.html'
   model = Menu
+  context_object_name = 'menu'
   form_class = MenuForm
   success_message = "Menu Updated successfully"
   

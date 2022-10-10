@@ -10,21 +10,21 @@
       <div class="col-12 col-md-8 mb-3">
         <div class="card border-danger rounded">
           <div class="card-body p-5 pt-0 ">
-            <h4 class="h4 text-center">FRIED RICE</h4><hr>    
+            <h4 class="h4 text-center">{{menu.name}}</h4><hr>    
             <div class="d-flex mt-2">
               <div class="text-center">
                 <p class="h6">Sales Price</p>
-                <span class="h6">GHC25.00</span>
+                <span class="h6">GHC{{menu.price}}</span>
               </div>
               <div class="text-center">
                 <p class="h6">Sales Discount</p>
-                <span class="h6">GHC2.10</span><small class="text-muted"> (2.00%)</small>
+                <span class="h6">GHC{{menu.get_discount|floatformat:2}}</span><small class="text-muted"> ({{menu.discount}}%)</small>
               </div>
             </div>
 
             <p class="h5 pt-3 text-center"> Description </p><hr class="mt-0 mb-1">
             <div class="text-center">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores maxime provident alias rerum distinctio libero eligendi pariatur molestiae repellendus beatae.</p>
+              <p>{{menu.detail}}</p>
             </div>
 
             <p class="h5 pt-3 text-center">Sales Summary</p>
@@ -39,9 +39,11 @@
                 </thead>
                 <tbody>
                   <tr class="">
-                    <td><span>GHC250.00</span><br><small>10 Sold</small></td>
-                    <td><span>GHC250.00</span><br><small>10 Sold</small></td>
-                    <td><span>GHC250.00</span><br><small>10 Sold</small></td>
+                    <td><span>GHC{{menu.get_today_sales.amount}}</span><br><small>{{menu.get_today_sales.qty}} Sold</small></td>
+
+                    <td><span>GHC{{menu.get_this_week_sales.amount}}</span><br><small>{{menu.get_this_week_sales.qty}} Sold</small></td>
+
+                    <td><span>GHC{{menu.get_this_month_sales.amount}}</span><br><small>{{menu.get_this_month_sales.qty}} Sold</small></td>
                   </tr>
                 </tbody>
               </table>

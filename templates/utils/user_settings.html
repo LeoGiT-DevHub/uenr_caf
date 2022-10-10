@@ -35,7 +35,7 @@
         <div class="row align-items-center pt-4">
           <a href="{% url 'user_cart' %}" class="col-6 text-center page-link bg-transparent rounded">
             <div class="d-flex bg-primary justify-content-center p-3 m-auto" style="border-radius: 1em; width: 5em;">
-              <small class="position-absolute text-white ml-3" style="top: 16px;">{{user_cart.count}}</small>
+              <small class="position-absolute text-white ml-3" style="top: 16px;">{{user.get_user_cart_pending.count}}</small>
               <i class="p-0 fe fe-shopping-cart fe-32 align-self-center text-white"></i>
             </div>
             <p class="pt-3">Cart</p>
@@ -43,7 +43,7 @@
           
           <a href="{% url 'user_orders' %}" class="col-6 text-center page-link bg-transparent rounded">
             <div class="d-flex bg-primary justify-content-center p-3 m-auto" style="border-radius: 1em; width: 5em;">
-              <small class="position-absolute text-white ml-3" style="top: 14px;">{{user_orders.count}}</small>
+              <small class="position-absolute text-white ml-3" style="top: 14px;">{{user.user_orders.count}}</small>
               <i class="p-0 fe fe-shopping-bag fe-32 align-self-center text-white"></i>
             </div>
             <p class="pt-3">Orders</p>

@@ -17,7 +17,7 @@
     <div class="col-auto d-flex">
       <button type="button" onclick="printTicket('print_here')" class="btn btn-secondary mr-2">Print</button>
       
-      {% paystack_button amount=order.amount_to_paid currency='GHS' ref=order.invoice email="j@example.com" button_class="btn btn-primary" redirect_url="localhost:8000/home/" %}
+      {% paystack_button amount=order.amount_to_paid currency='GHS' email=user.email button_class="btn btn-primary" redirect_url="localhost:8000/home/" %}
     </div>
   </div>
 
