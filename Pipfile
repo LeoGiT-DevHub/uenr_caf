@@ -9,6 +9,7 @@ pillow = "*"
 pypaystack = {editable = true, ref = "master", git = "https://github.com/gbozee/pypaystack.git"}
 django-heroku = "*"
 python-decouple = "*"
+gunicorn = "*"
 
 [dev-packages]
 
