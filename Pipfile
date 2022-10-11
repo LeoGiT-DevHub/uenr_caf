@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 pillow = "*"
 pypaystack = {editable = true, ref = "master", git = "https://github.com/gbozee/pypaystack.git"}
+decouple = "*"
+django-heroku = "*"
 
 [dev-packages]
 
