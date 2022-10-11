@@ -88,14 +88,14 @@
           <!-- LOGO -->
           <div class="w-100 mb-4 d-flex">
             {% if user.is_superuser %}
-            <a class="navbar-brand mx-auto mt-2 flex-fill text-center text-warning fw-bold" href="{% url 'admin:index' %}">
-              {% comment %} UENR CAFETERIA {% endcomment %}
-              <img src="{% static 'assets/images/LeoGiT.jpeg' %}" alt="" width="30" class="rounded">
+            <a class="navbar-brand mx-auto mt-2 flex-fill text-center fw-bold" href="{% url 'admin:index' %}">
+              <h5 class="h5 page-title">UENR CAFETERIA</h5>
+              {% comment %} <img src="{% static 'assets/images/LeoGiT.jpeg' %}" alt="" width="30" class="rounded"> {% endcomment %}
             </a>
             {% else %}
-            <a class="navbar-brand mx-auto mt-2 flex-fill text-center text-warning fw-bold" href="{% url 'dashboard' %}">
-              {% comment %} UENR CAFETERIA {% endcomment %}
-              <img src="{% static 'assets/images/LeoGiT.jpeg' %}" alt="" width="30" class="rounded">
+            <a class="navbar-brand mx-auto mt-2 flex-fill text-center page-title fw-bold" href="{% url 'dashboard' %}">
+              UENR CAFETERIA
+              {% comment %} <img src="{% static 'assets/images/LeoGiT.jpeg' %}" alt="" width="30" class="rounded"> {% endcomment %}
             </a>
             {% endif %}
           </div>
@@ -269,7 +269,7 @@
             </li>
           </ul> {% endcomment %}
 
-          <div class="modal-footer w-100 mt-3">
+          <div class="modal-footer mt-3 w-100">
             <a href="{% url 'menu' %}" class="btn btn-primary btn-md btn-block w-100">
               <i class="fe fe-shopping-cart fe-12 mx-2"></i><span class="small fw-bold">Sell now</span>
             </a>
