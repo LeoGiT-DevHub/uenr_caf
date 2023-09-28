@@ -1,12 +1,8 @@
-/* --- duiol --- */
+
 .d-flex{
   display: flex;
   justify-content: space-between;
 }
-
-
-
-
 
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
 body {

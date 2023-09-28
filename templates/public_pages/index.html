@@ -94,7 +94,31 @@
 
 
 {% block main_content %}
-  {% include 'utils/active_menu.html' %}
+<div class="container mt-4">
+  {% include 'utils/msg.html' %} 
+  <h2 class="text-center h3">Active Menu</h2>
+
+  <div class="food_section layout_padding-bottom">
+    <ul class="filters_menu">
+      <li class="active" data-filter="*">All</li>
+      {% for cat in category %}
+      <li data-filter=".{{cat}}">{{cat.name}}</li>
+      {% endfor %}
+    </ul>
+
+    <div class="row grid justify-content-center">
+      {% for item in menu %}
+      {% if item.active %}
+      {% include 'utils/active_menu.html' %}
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="btn-box">
+      <a href="{% url 'menu' %}" class="nav-link h6">Show More</a>
+    </div>
+  </div>
+</div>
 
 
 <div class="container mb-5" id="our_service">

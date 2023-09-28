@@ -5,10 +5,12 @@
 
   <div class="container pt-3"> 
     {% include 'utils/msg.html' %}
-
+    {% with menu as menu %}
     <div class="row food_section layout_padding-bottom">
       <div class="col-12 col-md-8 mb-3">
-        <div class="card border-danger rounded">
+        {% with menu.active_qty as qty %}
+        <div class="card {% if qty > 0 %} {% if qty >= 25 %} border-success {% else %} border-warning {% endif %} {% else %} border-danger rounded {% endif %}">
+        {% endwith %}
           <div class="card-body p-5 pt-0 ">
             <h4 class="h4 text-center">{{menu.name}}</h4><hr>    
             <div class="d-flex mt-2">
@@ -53,22 +55,22 @@
             <div class="d-flex text-center">
               <div class="">
                 <p class="h6">Added By</p>
-                <span class="h6">Leo Genius</span><br><small class="text-muted">12/09/2022</small>
+                <span class="h6">Leo Genius</span><br><small class="text-muted">{{menu.date}}</small>
               </div>
               <div class="">
                 <p class="h6">Updated By</p>
-                <span class="h6">Dominic Leo</span><br><small class="text-muted">12/09/2022</small>
+                <span class="h6">Dominic Leo</span><br><small class="text-muted">{{menu.updated_on}}</small>
               </div>
             </div>
           </div>
           <div class="card-footer d-flex align-items-center">
             <div class="">
-              <span class="h6">50</span><span class="h6"> In Stock</span>
+              <span class="h6">{{menu.active_qty}}</span><span class="h6"> In Stock</span>
             </div>
 
             <div class="btn-group">
-              <a href="" class="btn btn-outline-primary ml-2 rounded">Edit</a>
-              <a href="" class="btn btn-outline-danger ml-2 rounded">Delete</a>
+              <a href="{% url 'update_menu' menu.pk %}" class="btn btn-outline-primary ml-2 rounded">Edit</a>
+              <a href="{% url 'delete_menu' menu.pk %}" class="btn btn-outline-danger ml-2 rounded">Delete</a>
             </div>
           </div>
         </div>
@@ -79,17 +81,17 @@
         <div class="box" style="max-width: 20em; margin: auto;">
           <div>
             <div class="img-box p-2">
-              <img src="ss" alt="">
+              <img src="{{menu.img.url}}" alt="">
             </div>
             <div class="detail-box pb-2 pr-2 pl-2 pt-1 ml-1 mr-1">
               <div class="d-flex align-items-center">
-                <h6 class="text-warning">FRIED RICE</h6>
+                <h6 class="text-warning">{{menu.name}}</h6>
                 <div class="d-flex">
-                  <small class="text-muted pr-2" style="text-decoration: line-through;">25.00</small>
-                  <small class="text-warning ">24.10</small>
+                  <small class="text-muted pr-2" style="text-decoration: line-through;">{{menu.price}}</small>
+                  <small class="text-warning ">{{menu.get_amount_to_pay|floatformat:2}}</small>
                 </div>
               </div>
-              <small class="">Lorem ipsum dolor sit amet...</small>
+              <small class="">{{menu.detail}}</small>
         
               <div class="btn-box options m-0 pt-1">
                 <button href="" name="buy_now" type="submit" value="{{item.pk}}"
@@ -155,6 +157,7 @@
         </div>
       </div>
     </div>
+    {% endwith %}
 
   </div>
 {% endblock main_content %}
